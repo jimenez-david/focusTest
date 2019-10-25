@@ -1,6 +1,7 @@
 package test;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,6 +9,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import utils.FocusCareers;
+import utils.FocusHP;
 
 public class FocusAutoTest {
 
@@ -21,6 +25,8 @@ public class FocusAutoTest {
 			WebDriver driver = new ChromeDriver();
 			WebDriverWait wait= new WebDriverWait(driver, 15);
 			String url = "http://www.google.com/";
+			FocusHP homePage = new FocusHP(driver);
+			FocusCareers careers = new FocusCareers (driver);
 			
 			/*Navigate to Google*/
 			driver.get(url);
@@ -38,6 +44,21 @@ public class FocusAutoTest {
 			WebElement focusLink = driver.findElement(By.xpath("//a[contains (@href, 'https://www.focusservices.com/')]"));
 			Assert.assertTrue(focusLink.isDisplayed(), "Link is displayed");		
 			focusLink.click();
+			
+			/*Click on Now Hiring*/
+			homePage.clickOnNowHiringLink();
+			
+			/*Click on Careers*/
+			homePage.clickOnCareersLink();
+			
+			/*Select SS Location*/
+			careers.selectLocation();
+			
+			/*Entering Text to search job vacancies*/
+			careers.enterTextOnKeywordInput("Contact" + Keys.ENTER);
+			
+			/*Validate there no positions available*/	
+			Assert.assertEquals(careers.getNoPositionMessage(), "Search completed. Found 0 matching record(s).");
 			
 			/*Killing driver session*/
 			driver.quit();
