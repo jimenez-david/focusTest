@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class FocusAutoTest {
@@ -32,7 +33,12 @@ public class FocusAutoTest {
 			WebElement inputButton = driver.findElement(By.name("btnK"));
 			wait.until(ExpectedConditions.elementToBeClickable(inputButton));				
 			inputButton.click();
-						
+			
+			/*Clicking on Focus link*/
+			WebElement focusLink = driver.findElement(By.xpath("//a[contains (@href, 'https://www.focusservices.com/')]"));
+			Assert.assertTrue(focusLink.isDisplayed(), "Link is displayed");		
+			focusLink.click();
+			
 			/*Killing driver session*/
 			driver.quit();
 		}
