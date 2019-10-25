@@ -9,6 +9,6 @@
 		  <artifactId>testng</artifactId>
 		  <version>6.8</version>
 		  <scope>test</scope>
-  </dependency> 
+  	  </dependency> 
  </dependencies>
 </project>
